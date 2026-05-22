@@ -274,6 +274,6 @@ torchvision==0.26.0
 
 # Author
 
-Developed by Ludo.
+Developed by Ludo!
 
 GitHub: https://github.com/Lvdoo/Drawing_Number_Recognition
