@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+cleaned_image.png
+cnn_model.pth
+hand_landmarker.task
+inverted_image.png
+preprocessed_image.png
