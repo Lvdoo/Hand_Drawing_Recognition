@@ -6,11 +6,17 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 # Convert images into tensors and normalize them
-transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,),(0.3081,))])
+transform_train = transforms.Compose([
+    transforms.RandomRotation(10),
+    transforms.RandomAffine(degrees=0, translate=(0.1, 0.1), scale=(0.9, 1.1), shear=10),
+    transforms.ToTensor(),
+    transforms.Normalize((0.1307,), (0.3081,))
+])
+transform_test = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.1307,),(0.3081,))])
 
 # Load dataset into train and test groups
-train_dataset = torchvision.datasets.MNIST(root = './data', train = True, transform = transform, download = True)
-test_dataset = torchvision.datasets.MNIST(root = './data', train = False, transform = transform, download = True)
+train_dataset = torchvision.datasets.MNIST(root = './data', train = True, transform = transform_train, download = True)
+test_dataset = torchvision.datasets.MNIST(root = './data', train = False, transform = transform_test, download = True)
 
 # Create minibatch
 train_batch = DataLoader(dataset = train_dataset, batch_size = 64, shuffle = True)
