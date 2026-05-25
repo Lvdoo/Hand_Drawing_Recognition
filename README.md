@@ -90,6 +90,16 @@ pip install -r requirements.txt
 
 ---
 
+## Start the CNN
+
+```bash
+
+python CNN.py
+
+```
+
+ ---
+
 ## Run the Project
 
 ```bash id="k9h1xm"
