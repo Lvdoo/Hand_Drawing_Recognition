@@ -98,7 +98,7 @@ python CNN.py
 
 ```
 
- ---
+---
 
 ## Run the Project
 
