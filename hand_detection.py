@@ -59,14 +59,14 @@ def draw_hand_result(rgb_image, result) :
 
             cv.line(img = annotated_image, pt1 = (x1, y1), pt2 = (x2, y2), color = (135, 206, 235), thickness = 2)
 
-        # Get the top left corner of the detected hand's bounding box.
-        x_coordinates = [landmark.x for landmark in hand_landmarks]
-        y_coordinates = [landmark.y for landmark in hand_landmarks]
-        x_min = max(int(min(x_coordinates) * width) - MARGIN, 0)
-        y_min = max(int(min(y_coordinates) * height) - MARGIN, 0)
-        x_max = min(int(max(x_coordinates) * width) + MARGIN, width)
-        y_max = min(int(max(y_coordinates) * height) + MARGIN, height)
-        cv.rectangle(annotated_image,(x_min, y_min), (x_max, y_max), (200), 2)
+        # # Get the top left corner of the detected hand's bounding box.
+        # x_coordinates = [landmark.x for landmark in hand_landmarks]
+        # y_coordinates = [landmark.y for landmark in hand_landmarks]
+        # x_min = max(int(min(x_coordinates) * width) - MARGIN, 0)
+        # y_min = max(int(min(y_coordinates) * height) - MARGIN, 0)
+        # x_max = min(int(max(x_coordinates) * width) + MARGIN, width)
+        # y_max = min(int(max(y_coordinates) * height) + MARGIN, height)
+        # cv.rectangle(annotated_image,(x_min, y_min), (x_max, y_max), (200), 2)
 
     return annotated_image
 

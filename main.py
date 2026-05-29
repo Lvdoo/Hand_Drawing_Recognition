@@ -24,19 +24,27 @@ with HandLandmarker.create_from_options(options) as landmarker:
             break
         
         rgb_frame = camera.convert_to_RGB(frame)
+        height, width = rgb_frame.shape[:2]
+        box_x1 = int(width * 0.25)
+        box_y1 = int(height * 0.20)
+        box_x2 = int(width * 0.75)
+        box_y2 = int(height * 0.80)
+        drawing_zone = rgb_frame[box_y1:box_y2, box_x1:box_x2]
+        cv.putText(rgb_frame, "Draw in the case",(int(width * 0.30), int(height * 0.15)),cv.FONT_HERSHEY_SIMPLEX, 1, (135,50,202), 2)
+        cv.rectangle(rgb_frame, (box_x1, box_y1), (box_x2, box_y2), (0,0,255), 1)
         result = detect_hands(rgb_frame, timestamp, landmarker)
     
         if len(result.hand_landmarks) == 0 : 
             annoted_image = rgb_frame.copy()
-            cropped_image, box = drawing_detection.locate_drawing(annoted_image)
+            cropped_image, box = drawing_detection.locate_drawing(drawing_zone)
             if box is not None:
                 x_min, y_min, x_max, y_max = box
                 cv.rectangle(
-                    annoted_image,
-                    (x_min, y_min),
-                    (x_max, y_max),
-                    (255, 0, 0),
-                    2)
+                annoted_image,
+                (box_x1 + x_min, box_y1 + y_min),
+                (box_x1 + x_max, box_y1 + y_max),
+                (255, 0, 0),
+                2)
 
             if cropped_image is None:
                 print("You draw nothing")
@@ -70,7 +78,7 @@ with HandLandmarker.create_from_options(options) as landmarker:
                         else : 
                             print("Analyzing")
                     if final_prediction is not None : 
-                        cv.putText(img = annoted_image, text = f"You draw {final_prediction}", org = (50,100), fontFace=cv.FONT_HERSHEY_SIMPLEX, fontScale=1, color = (135,50,202), thickness = 2)
+                        cv.putText(img = annoted_image, text = f"You draw {final_prediction}", org = (int(width*0.37),int(height*0.90)), fontFace=cv.FONT_HERSHEY_SIMPLEX, fontScale=1, color = (135,50,202), thickness = 2)
 
         else :
             annoted_image = draw_hand_result(rgb_frame, result)
