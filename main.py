@@ -6,7 +6,7 @@ import torch.nn as nn
 
 import camera
 import drawing_detection
-import model
+import CNN_model
 import preprocessing
 from hand_detection import *
 
@@ -54,7 +54,7 @@ with HandLandmarker.create_from_options(options) as landmarker:
                 final_image = preprocessing.preprocess(cropped_image)
                 with torch.no_grad():
                     if prediction_done == False :
-                        outputs = model.model(final_image)
+                        outputs = CNN_model.model(final_image)
                         probabilities = softmax(outputs)
                         max_probability, prediction = torch.max(probabilities, 1)
                         max_probability = max_probability.item()
