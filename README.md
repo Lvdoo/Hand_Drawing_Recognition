@@ -1,4 +1,4 @@
-# Hand Drawn Number Recognition
+# Hand Written Number Recognition
 
 A real-time handwritten digit recognition project using **OpenCV**, **PyTorch**, and **MediaPipe**.
 The application detects a handwritten number drawn on a sheet of paper through a webcam, preprocesses the image, and predicts the digit using a trained CNN model.
